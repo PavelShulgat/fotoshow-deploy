@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: fotoshow
+  labels:
+    app: fotoshow
+spec:
+  ports:
+    - name: 18181-tcp
+      protocol: TCP
+      port: 18181
+      targetPort: 18181
+  type: ClusterIP
+  selector:
+    app: fotoshow

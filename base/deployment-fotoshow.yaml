@@ -1,0 +1,28 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: fotoshow
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fotoshow
+  template:
+    metadata:
+      labels:
+        app: fotoshow
+    spec:
+      containers:
+        - name: fotoshow
+          image: ghcr.io/pavelshulgat/fotoshow:latest
+          ports:
+            - containerPort: 18181
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /q/health/ready
+              port: 18181
+          livenessProbe:
+            httpGet:
+              path: /q/health/live
+              port: 18181
